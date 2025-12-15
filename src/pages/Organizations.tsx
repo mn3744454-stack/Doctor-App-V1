@@ -1,4 +1,4 @@
-import { Building2, MapPin, Phone, Mail, Users, Briefcase } from 'lucide-react';
+import { Building2, MapPin, Users, Briefcase } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import MobileLayout from '@/components/layout/MobileLayout';
 import { Card, CardContent } from '@/components/ui/card';
@@ -12,9 +12,9 @@ const orgTypeLabels = {
 };
 
 const orgTypeColors = {
-  stable: 'bg-primary/10 text-primary',
-  clinic: 'bg-accent/10 text-accent',
-  lab: 'bg-warning/10 text-warning',
+  stable: 'bg-primary/10 text-primary border-primary/20',
+  clinic: 'bg-forest/10 text-forest border-forest/20',
+  lab: 'bg-amber/10 text-amber border-amber/20',
 };
 
 export default function Organizations() {
@@ -29,7 +29,7 @@ export default function Organizations() {
       <div className="px-4 py-4 space-y-4">
         {/* Summary Cards */}
         <div className="grid grid-cols-2 gap-3">
-          <Card className="border-0 shadow-card">
+          <Card className="border-0 shadow-soft gradient-card">
             <CardContent className="p-4 flex items-center gap-3">
               <div className="p-2 rounded-full bg-primary/10 text-primary">
                 <Briefcase className="h-5 w-5" />
@@ -42,9 +42,9 @@ export default function Organizations() {
               </div>
             </CardContent>
           </Card>
-          <Card className="border-0 shadow-card">
+          <Card className="border-0 shadow-soft gradient-card">
             <CardContent className="p-4 flex items-center gap-3">
-              <div className="p-2 rounded-full bg-accent/10 text-accent">
+              <div className="p-2 rounded-full bg-forest/10 text-forest">
                 <Users className="h-5 w-5" />
               </div>
               <div>
@@ -61,7 +61,7 @@ export default function Organizations() {
         <div className="space-y-3">
           <h3 className="text-sm font-semibold text-muted-foreground">جهاتك</h3>
           
-          {memberships.map(membership => {
+          {memberships.map((membership, index) => {
             const org = membership.organization;
             if (!org) return null;
 
@@ -70,12 +70,13 @@ export default function Organizations() {
             return (
               <Card 
                 key={membership.id}
-                className="border-0 shadow-card cursor-pointer hover:shadow-md transition-shadow"
+                className="border-0 shadow-soft cursor-pointer hover:shadow-elevated transition-all duration-300 animate-fade-in"
                 onClick={() => navigate(`/organizations/${org.id}`)}
+                style={{ animationDelay: `${index * 100}ms` }}
               >
                 <CardContent className="p-4">
                   <div className="flex items-start gap-4">
-                    <div className="h-14 w-14 rounded-xl overflow-hidden bg-muted flex-shrink-0">
+                    <div className="h-14 w-14 rounded-xl overflow-hidden bg-sand flex-shrink-0 shadow-soft">
                       <img 
                         src={org.logo}
                         alt={org.name}
@@ -87,7 +88,7 @@ export default function Organizations() {
                         <h4 className="font-semibold text-foreground">
                           {org.name}
                         </h4>
-                        <Badge className={orgTypeColors[org.type]}>
+                        <Badge variant="outline" className={orgTypeColors[org.type]}>
                           {orgTypeLabels[org.type]}
                         </Badge>
                       </div>
@@ -97,8 +98,8 @@ export default function Organizations() {
                           variant="outline" 
                           className={`text-xs ${
                             membership.employmentType === 'employee' 
-                              ? 'border-primary/30 text-primary' 
-                              : 'border-accent/30 text-accent'
+                              ? 'border-primary/30 text-primary bg-primary/5' 
+                              : 'border-forest/30 text-forest bg-forest/5'
                           }`}
                         >
                           {membership.employmentType === 'employee' ? 'موظف' : 'مستقل'}
@@ -109,7 +110,7 @@ export default function Organizations() {
                       </div>
 
                       <div className="flex items-center gap-1 text-xs text-muted-foreground">
-                        <MapPin className="h-3.5 w-3.5" />
+                        <MapPin className="h-3.5 w-3.5 text-primary" />
                         <span className="truncate">{org.address}</span>
                       </div>
                     </div>

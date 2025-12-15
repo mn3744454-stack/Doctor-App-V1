@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Search, Filter, Eye, Edit, Shield } from 'lucide-react';
+import { Search, Eye, Edit, Shield } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import MobileLayout from '@/components/layout/MobileLayout';
 import { Card, CardContent } from '@/components/ui/card';
@@ -22,9 +22,9 @@ const accessLevelIcons = {
 };
 
 const accessLevelColors = {
-  view: 'bg-muted text-muted-foreground',
-  edit: 'bg-accent/10 text-accent',
-  full: 'bg-primary/10 text-primary',
+  view: 'bg-sand text-stable-brown border-sand',
+  edit: 'bg-amber/10 text-amber border-amber/20',
+  full: 'bg-forest/10 text-forest border-forest/20',
 };
 
 export default function Horses() {
@@ -51,7 +51,7 @@ export default function Horses() {
             placeholder="ابحث عن حصان..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="pr-10 bg-card border-0 shadow-card"
+            className="pr-10 bg-cream/50 border-sand focus:border-primary"
           />
         </div>
 
@@ -61,7 +61,10 @@ export default function Horses() {
             variant={selectedOrg === null ? 'default' : 'outline'}
             size="sm"
             onClick={() => setSelectedOrg(null)}
-            className="flex-shrink-0"
+            className={cn(
+              "flex-shrink-0",
+              selectedOrg === null ? "gradient-hero" : "border-sand bg-cream/50"
+            )}
           >
             الكل
           </Button>
@@ -71,7 +74,10 @@ export default function Horses() {
               variant={selectedOrg === org.id ? 'default' : 'outline'}
               size="sm"
               onClick={() => setSelectedOrg(org.id)}
-              className="flex-shrink-0 gap-2"
+              className={cn(
+                "flex-shrink-0 gap-2",
+                selectedOrg === org.id ? "gradient-hero" : "border-sand bg-cream/50"
+              )}
             >
               <img 
                 src={org.logo} 
@@ -86,24 +92,25 @@ export default function Horses() {
         {/* Horses List */}
         <div className="space-y-3">
           {filteredHorses.length === 0 ? (
-            <Card className="border-0 shadow-card">
+            <Card className="border-0 shadow-soft">
               <CardContent className="p-8 text-center">
                 <p className="text-muted-foreground">لا توجد خيول</p>
               </CardContent>
             </Card>
           ) : (
-            filteredHorses.map(access => {
+            filteredHorses.map((access, index) => {
               const AccessIcon = accessLevelIcons[access.accessLevel];
               
               return (
                 <Card 
                   key={access.id}
-                  className="border-0 shadow-card cursor-pointer hover:shadow-md transition-shadow"
+                  className="border-0 shadow-soft cursor-pointer hover:shadow-elevated transition-all duration-300 animate-fade-in"
                   onClick={() => navigate(`/horses/${access.horse?.id}`)}
+                  style={{ animationDelay: `${index * 50}ms` }}
                 >
                   <CardContent className="p-4">
                     <div className="flex items-center gap-4">
-                      <div className="h-16 w-16 rounded-xl overflow-hidden bg-muted flex-shrink-0">
+                      <div className="h-16 w-16 rounded-xl overflow-hidden bg-sand flex-shrink-0 shadow-soft">
                         <img 
                           src={access.horse?.image} 
                           alt={access.horse?.name}
@@ -115,7 +122,7 @@ export default function Horses() {
                           <h4 className="font-semibold text-foreground text-lg">
                             {access.horse?.name}
                           </h4>
-                          <Badge className={cn('text-xs gap-1', accessLevelColors[access.accessLevel])}>
+                          <Badge variant="outline" className={cn('text-xs gap-1', accessLevelColors[access.accessLevel])}>
                             <AccessIcon className="h-3 w-3" />
                             {accessLevelLabels[access.accessLevel]}
                           </Badge>
@@ -127,7 +134,7 @@ export default function Horses() {
                           <img 
                             src={access.horse?.organization?.logo}
                             alt={access.horse?.organization?.name}
-                            className="h-5 w-5 rounded-full object-cover"
+                            className="h-5 w-5 rounded-full object-cover shadow-soft"
                           />
                           <span className="text-xs text-muted-foreground">
                             {access.horse?.organization?.name}

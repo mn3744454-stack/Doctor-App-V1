@@ -37,14 +37,14 @@ export default function Dashboard() {
       icon: Stethoscope, 
       label: 'الخيول', 
       value: horseAccess.length,
-      color: 'text-accent bg-accent/10',
+      color: 'text-forest bg-forest/10',
       onClick: () => navigate('/horses')
     },
     { 
       icon: Calendar, 
       label: 'اليوم', 
       value: todayAppointments.length,
-      color: 'text-warning bg-warning/10',
+      color: 'text-amber bg-amber/10',
       onClick: () => navigate('/appointments')
     },
   ];
@@ -63,8 +63,8 @@ export default function Dashboard() {
     <MobileLayout>
       <div className="px-4 py-4 space-y-6">
         {/* Welcome Section */}
-        <div className="flex items-center gap-4">
-          <Avatar className="h-14 w-14 ring-2 ring-primary/20">
+        <div className="flex items-center gap-4 animate-fade-in">
+          <Avatar className="h-14 w-14 ring-2 ring-primary/20 shadow-soft">
             <AvatarImage src={currentUser.avatar} alt={currentUser.name} />
             <AvatarFallback className="bg-primary text-primary-foreground text-lg">
               {currentUser.name.charAt(0)}
@@ -82,7 +82,7 @@ export default function Dashboard() {
           {stats.map((stat, index) => (
             <Card 
               key={index} 
-              className="cursor-pointer hover:shadow-md transition-shadow border-0 shadow-card"
+              className="cursor-pointer hover:shadow-elevated transition-all duration-300 border-0 shadow-soft gradient-card"
               onClick={stat.onClick}
             >
               <CardContent className="p-4 flex flex-col items-center gap-2">
@@ -102,14 +102,14 @@ export default function Dashboard() {
             <h3 className="text-base font-semibold text-foreground">المواعيد القادمة</h3>
             <button 
               onClick={() => navigate('/appointments')}
-              className="text-sm text-primary font-medium"
+              className="text-sm text-primary font-medium hover:text-primary/80 transition-colors"
             >
               عرض الكل
             </button>
           </div>
 
           {upcomingAppointments.length === 0 ? (
-            <Card className="border-0 shadow-card">
+            <Card className="border-0 shadow-soft">
               <CardContent className="p-6 text-center">
                 <Calendar className="h-10 w-10 mx-auto text-muted-foreground/50 mb-2" />
                 <p className="text-muted-foreground text-sm">لا توجد مواعيد قادمة</p>
@@ -117,15 +117,16 @@ export default function Dashboard() {
             </Card>
           ) : (
             <div className="space-y-3">
-              {upcomingAppointments.map((appointment) => (
+              {upcomingAppointments.map((appointment, index) => (
                 <Card 
                   key={appointment.id} 
-                  className="border-0 shadow-card cursor-pointer hover:shadow-md transition-shadow"
+                  className="border-0 shadow-soft cursor-pointer hover:shadow-elevated transition-all duration-300"
                   onClick={() => navigate(`/appointments/${appointment.id}`)}
+                  style={{ animationDelay: `${index * 100}ms` }}
                 >
                   <CardContent className="p-4">
                     <div className="flex items-start gap-3">
-                      <div className="h-12 w-12 rounded-lg overflow-hidden bg-muted flex-shrink-0">
+                      <div className="h-12 w-12 rounded-lg overflow-hidden bg-sand flex-shrink-0">
                         <img 
                           src={appointment.horse?.image} 
                           alt={appointment.horse?.name}
@@ -144,7 +145,7 @@ export default function Dashboard() {
                           </div>
                           <Badge 
                             variant="secondary" 
-                            className="text-xs flex-shrink-0 bg-primary/10 text-primary"
+                            className="text-xs flex-shrink-0 bg-amber/10 text-amber-foreground border-amber/20"
                           >
                             {appointment.duration} د
                           </Badge>
@@ -168,7 +169,7 @@ export default function Dashboard() {
             <h3 className="text-base font-semibold text-foreground">الجهات المرتبطة</h3>
             <button 
               onClick={() => navigate('/organizations')}
-              className="text-sm text-primary font-medium"
+              className="text-sm text-primary font-medium hover:text-primary/80 transition-colors"
             >
               عرض الكل
             </button>
@@ -178,11 +179,11 @@ export default function Dashboard() {
             {memberships.map((membership) => (
               <Card 
                 key={membership.id}
-                className="flex-shrink-0 w-32 border-0 shadow-card cursor-pointer hover:shadow-md transition-shadow"
+                className="flex-shrink-0 w-32 border-0 shadow-soft cursor-pointer hover:shadow-elevated transition-all duration-300"
                 onClick={() => navigate(`/organizations/${membership.organizationId}`)}
               >
                 <CardContent className="p-3 flex flex-col items-center gap-2">
-                  <div className="h-12 w-12 rounded-full overflow-hidden bg-muted">
+                  <div className="h-12 w-12 rounded-full overflow-hidden bg-sand shadow-soft">
                     <img 
                       src={membership.organization?.logo}
                       alt={membership.organization?.name}
@@ -196,8 +197,8 @@ export default function Dashboard() {
                     variant="outline" 
                     className={`text-[10px] ${
                       membership.employmentType === 'employee' 
-                        ? 'border-primary/30 text-primary' 
-                        : 'border-accent/30 text-accent'
+                        ? 'border-primary/30 text-primary bg-primary/5' 
+                        : 'border-forest/30 text-forest bg-forest/5'
                     }`}
                   >
                     {membership.employmentType === 'employee' ? 'موظف' : 'مستقل'}

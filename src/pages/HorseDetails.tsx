@@ -5,12 +5,10 @@ import {
   Plus, 
   Activity,
   Dna,
-  Weight,
-  Ruler,
   Palette
 } from 'lucide-react';
 import MobileLayout from '@/components/layout/MobileLayout';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
@@ -27,11 +25,11 @@ const recordTypeLabels = {
 };
 
 const recordTypeColors = {
-  checkup: 'bg-primary/10 text-primary',
-  treatment: 'bg-accent/10 text-accent',
-  surgery: 'bg-destructive/10 text-destructive',
-  vaccination: 'bg-green-500/10 text-green-600',
-  diagnosis: 'bg-warning/10 text-warning',
+  checkup: 'bg-primary/10 text-primary border-primary/20',
+  treatment: 'bg-amber/10 text-amber border-amber/20',
+  surgery: 'bg-destructive/10 text-destructive border-destructive/20',
+  vaccination: 'bg-forest/10 text-forest border-forest/20',
+  diagnosis: 'bg-amber/10 text-amber border-amber/20',
 };
 
 export default function HorseDetails() {
@@ -67,20 +65,20 @@ export default function HorseDetails() {
     <MobileLayout title={horse.name} showBack>
       <div className="pb-4">
         {/* Hero Section */}
-        <div className="relative h-56 bg-muted">
+        <div className="relative h-56 bg-sand">
           <img 
             src={horse.image}
             alt={horse.name}
             className="h-full w-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
           <div className="absolute bottom-4 right-4 left-4">
             <h1 className="text-2xl font-bold text-foreground mb-1">{horse.name}</h1>
             <div className="flex items-center gap-2">
               <img 
                 src={horse.organization?.logo}
                 alt={horse.organization?.name}
-                className="h-5 w-5 rounded-full object-cover"
+                className="h-5 w-5 rounded-full object-cover shadow-soft"
               />
               <span className="text-sm text-muted-foreground">
                 {horse.organization?.name}
@@ -93,7 +91,7 @@ export default function HorseDetails() {
           {/* Info Cards */}
           <div className="grid grid-cols-2 gap-3">
             {infoItems.map((item, index) => (
-              <Card key={index} className="border-0 shadow-card">
+              <Card key={index} className="border-0 shadow-soft gradient-card">
                 <CardContent className="p-3 flex items-center gap-3">
                   <div className="p-2 rounded-full bg-primary/10 text-primary">
                     <item.icon className="h-4 w-4" />
@@ -109,7 +107,7 @@ export default function HorseDetails() {
 
           {/* Microchip ID */}
           {horse.microchipId && (
-            <Card className="border-0 shadow-card">
+            <Card className="border-0 shadow-soft">
               <CardContent className="p-3 flex items-center justify-between">
                 <div>
                   <p className="text-xs text-muted-foreground">رقم الشريحة</p>
@@ -123,12 +121,12 @@ export default function HorseDetails() {
 
           {/* Tabs */}
           <Tabs defaultValue="records" className="w-full">
-            <TabsList className="grid w-full grid-cols-2 bg-muted/50">
-              <TabsTrigger value="records" className="gap-2">
+            <TabsList className="grid w-full grid-cols-2 bg-sand/50">
+              <TabsTrigger value="records" className="gap-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
                 <FileText className="h-4 w-4" />
                 السجلات
               </TabsTrigger>
-              <TabsTrigger value="appointments" className="gap-2">
+              <TabsTrigger value="appointments" className="gap-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
                 <Calendar className="h-4 w-4" />
                 المواعيد
               </TabsTrigger>
@@ -137,7 +135,7 @@ export default function HorseDetails() {
             <TabsContent value="records" className="mt-4 space-y-3">
               {canEdit && (
                 <Button 
-                  className="w-full gap-2"
+                  className="w-full gap-2 gradient-hero"
                   onClick={() => navigate(`/horses/${horse.id}/add-record`)}
                 >
                   <Plus className="h-4 w-4" />
@@ -146,7 +144,7 @@ export default function HorseDetails() {
               )}
 
               {horseMedicalRecords.length === 0 ? (
-                <Card className="border-0 shadow-card">
+                <Card className="border-0 shadow-soft">
                   <CardContent className="p-6 text-center">
                     <FileText className="h-10 w-10 mx-auto text-muted-foreground/30 mb-2" />
                     <p className="text-muted-foreground text-sm">لا توجد سجلات طبية</p>
@@ -156,12 +154,12 @@ export default function HorseDetails() {
                 horseMedicalRecords.map(record => (
                   <Card 
                     key={record.id} 
-                    className="border-0 shadow-card cursor-pointer hover:shadow-md transition-shadow"
+                    className="border-0 shadow-soft cursor-pointer hover:shadow-elevated transition-all duration-300"
                     onClick={() => navigate(`/records/${record.id}`)}
                   >
                     <CardContent className="p-4">
                       <div className="flex items-start justify-between gap-2 mb-2">
-                        <Badge className={recordTypeColors[record.type]}>
+                        <Badge variant="outline" className={recordTypeColors[record.type]}>
                           {recordTypeLabels[record.type]}
                         </Badge>
                         <span className="text-xs text-muted-foreground">
@@ -186,7 +184,7 @@ export default function HorseDetails() {
 
             <TabsContent value="appointments" className="mt-4 space-y-3">
               {horseAppointments.length === 0 ? (
-                <Card className="border-0 shadow-card">
+                <Card className="border-0 shadow-soft">
                   <CardContent className="p-6 text-center">
                     <Calendar className="h-10 w-10 mx-auto text-muted-foreground/30 mb-2" />
                     <p className="text-muted-foreground text-sm">لا توجد مواعيد</p>
@@ -196,13 +194,19 @@ export default function HorseDetails() {
                 horseAppointments.map(apt => (
                   <Card 
                     key={apt.id} 
-                    className="border-0 shadow-card cursor-pointer hover:shadow-md transition-shadow"
+                    className="border-0 shadow-soft cursor-pointer hover:shadow-elevated transition-all duration-300"
                     onClick={() => navigate(`/appointments/${apt.id}`)}
                   >
                     <CardContent className="p-4">
                       <div className="flex items-start justify-between gap-2 mb-2">
                         <h4 className="font-semibold text-foreground">{apt.title}</h4>
-                        <Badge variant="outline" className="text-xs">
+                        <Badge 
+                          variant="outline" 
+                          className={apt.status === 'completed' 
+                            ? 'border-forest/20 text-forest bg-forest/5' 
+                            : 'border-primary/20 text-primary bg-primary/5'
+                          }
+                        >
                           {apt.status === 'completed' ? 'مكتمل' : 'مجدول'}
                         </Badge>
                       </div>

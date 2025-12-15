@@ -19,10 +19,10 @@ const statusLabels = {
 };
 
 const statusColors = {
-  scheduled: 'bg-primary/10 text-primary',
-  in_progress: 'bg-warning/10 text-warning',
-  completed: 'bg-green-500/10 text-green-600',
-  cancelled: 'bg-destructive/10 text-destructive',
+  scheduled: 'bg-primary/10 text-primary border-primary/20',
+  in_progress: 'bg-amber/10 text-amber border-amber/20',
+  completed: 'bg-forest/10 text-forest border-forest/20',
+  cancelled: 'bg-destructive/10 text-destructive border-destructive/20',
 };
 
 export default function Appointments() {
@@ -45,12 +45,12 @@ export default function Appointments() {
 
   const AppointmentCard = ({ appointment }: { appointment: typeof appointments[0] }) => (
     <Card 
-      className="border-0 shadow-card cursor-pointer hover:shadow-md transition-shadow"
+      className="border-0 shadow-soft cursor-pointer hover:shadow-elevated transition-all duration-300"
       onClick={() => navigate(`/appointments/${appointment.id}`)}
     >
       <CardContent className="p-4">
         <div className="flex items-start gap-3">
-          <div className="h-14 w-14 rounded-xl overflow-hidden bg-muted flex-shrink-0">
+          <div className="h-14 w-14 rounded-xl overflow-hidden bg-sand flex-shrink-0 shadow-soft">
             <img 
               src={appointment.horse?.image} 
               alt={appointment.horse?.name}
@@ -62,7 +62,7 @@ export default function Appointments() {
               <h4 className="font-semibold text-foreground">
                 {appointment.title}
               </h4>
-              <Badge className={cn('text-xs', statusColors[appointment.status])}>
+              <Badge variant="outline" className={cn('text-xs', statusColors[appointment.status])}>
                 {statusLabels[appointment.status]}
               </Badge>
             </div>
@@ -71,13 +71,13 @@ export default function Appointments() {
             </p>
             <div className="flex flex-wrap gap-3 text-xs text-muted-foreground">
               <div className="flex items-center gap-1">
-                <Clock className="h-3.5 w-3.5" />
+                <Clock className="h-3.5 w-3.5 text-primary" />
                 <span>{format(new Date(appointment.scheduledAt), 'HH:mm')}</span>
                 <span className="text-muted-foreground/50">•</span>
                 <span>{appointment.duration} دقيقة</span>
               </div>
               <div className="flex items-center gap-1">
-                <MapPin className="h-3.5 w-3.5" />
+                <MapPin className="h-3.5 w-3.5 text-primary" />
                 <span className="truncate">{appointment.location}</span>
               </div>
             </div>
@@ -106,7 +106,7 @@ export default function Appointments() {
       <div className="px-4 py-4 space-y-4">
         {/* Filter Button */}
         <div className="flex justify-end">
-          <Button variant="outline" size="sm" className="gap-2">
+          <Button variant="outline" size="sm" className="gap-2 border-sand bg-cream/50 hover:bg-sand/50">
             <Filter className="h-4 w-4" />
             تصفية
           </Button>
@@ -114,14 +114,18 @@ export default function Appointments() {
 
         {/* Tabs */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="grid w-full grid-cols-2 bg-muted/50">
-            <TabsTrigger value="upcoming">القادمة</TabsTrigger>
-            <TabsTrigger value="past">السابقة</TabsTrigger>
+          <TabsList className="grid w-full grid-cols-2 bg-sand/50">
+            <TabsTrigger value="upcoming" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+              القادمة
+            </TabsTrigger>
+            <TabsTrigger value="past" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+              السابقة
+            </TabsTrigger>
           </TabsList>
 
           <TabsContent value="upcoming" className="mt-4 space-y-4">
             {upcomingAppointments.length === 0 ? (
-              <Card className="border-0 shadow-card">
+              <Card className="border-0 shadow-soft">
                 <CardContent className="p-8 text-center">
                   <Calendar className="h-12 w-12 mx-auto text-muted-foreground/30 mb-3" />
                   <p className="text-muted-foreground">لا توجد مواعيد قادمة</p>
@@ -130,7 +134,7 @@ export default function Appointments() {
             ) : (
               Object.entries(groupAppointmentsByDate(upcomingAppointments)).map(([dateKey, apts]) => (
                 <div key={dateKey} className="space-y-3">
-                  <h3 className="text-sm font-semibold text-muted-foreground sticky top-0 bg-background py-1">
+                  <h3 className="text-sm font-semibold text-primary sticky top-0 bg-background py-1">
                     {getDateLabel(new Date(dateKey))}
                   </h3>
                   <div className="space-y-3">
@@ -145,7 +149,7 @@ export default function Appointments() {
 
           <TabsContent value="past" className="mt-4 space-y-3">
             {pastAppointments.length === 0 ? (
-              <Card className="border-0 shadow-card">
+              <Card className="border-0 shadow-soft">
                 <CardContent className="p-8 text-center">
                   <Calendar className="h-12 w-12 mx-auto text-muted-foreground/30 mb-3" />
                   <p className="text-muted-foreground">لا توجد مواعيد سابقة</p>

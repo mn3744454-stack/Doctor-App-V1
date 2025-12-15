@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Eye, EyeOff, Stethoscope } from 'lucide-react';
+import { Eye, EyeOff } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -14,7 +14,6 @@ export default function Login() {
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    // Mock login - navigate to dashboard
     navigate('/');
   };
 
@@ -23,16 +22,24 @@ export default function Login() {
       {/* Header */}
       <div className="flex-1 flex flex-col items-center justify-center p-6">
         {/* Logo */}
-        <div className="mb-8 text-center">
-          <div className="inline-flex items-center justify-center h-20 w-20 rounded-2xl gradient-primary mb-4">
-            <Stethoscope className="h-10 w-10 text-primary-foreground" />
+        <div className="mb-8 text-center animate-fade-in">
+          <div className="inline-flex items-center justify-center h-20 w-20 rounded-2xl gradient-hero shadow-glow mb-4">
+            <svg 
+              className="h-10 w-10 text-primary-foreground" 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              stroke="currentColor" 
+              strokeWidth="2"
+            >
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+            </svg>
           </div>
-          <h1 className="text-2xl font-bold text-foreground">VetConnect</h1>
-          <p className="text-muted-foreground text-sm mt-1">منصة الأطباء البيطريين</p>
+          <h1 className="text-2xl font-bold text-foreground">StableMate</h1>
+          <p className="text-muted-foreground text-sm mt-1">بوابة الأطباء البيطريين</p>
         </div>
 
         {/* Login Form */}
-        <Card className="w-full max-w-sm border-0 shadow-card">
+        <Card className="w-full max-w-sm border-0 shadow-elevated animate-slide-up">
           <CardContent className="p-6">
             <h2 className="text-xl font-semibold text-foreground text-center mb-6">
               تسجيل الدخول
@@ -47,7 +54,7 @@ export default function Login() {
                   placeholder="doctor@example.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="text-left"
+                  className="text-left bg-cream/50 border-sand focus:border-primary"
                   dir="ltr"
                 />
               </div>
@@ -61,13 +68,13 @@ export default function Login() {
                     placeholder="••••••••"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="pl-10 text-left"
+                    className="pl-10 text-left bg-cream/50 border-sand focus:border-primary"
                     dir="ltr"
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                    className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
                   >
                     {showPassword ? (
                       <EyeOff className="h-4 w-4" />
@@ -80,12 +87,12 @@ export default function Login() {
 
               <button
                 type="button"
-                className="text-sm text-primary hover:underline"
+                className="text-sm text-primary hover:text-primary/80 transition-colors"
               >
                 نسيت كلمة المرور؟
               </button>
 
-              <Button type="submit" className="w-full gradient-primary">
+              <Button type="submit" className="w-full gradient-hero hover:opacity-90 transition-opacity shadow-soft">
                 تسجيل الدخول
               </Button>
             </form>
@@ -93,7 +100,7 @@ export default function Login() {
             <div className="mt-6 text-center">
               <p className="text-sm text-muted-foreground">
                 ليس لديك حساب؟{' '}
-                <button className="text-primary font-medium hover:underline">
+                <button className="text-primary font-medium hover:text-primary/80 transition-colors">
                   إنشاء حساب جديد
                 </button>
               </p>

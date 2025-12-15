@@ -4,7 +4,6 @@ import {
   Phone, 
   Award, 
   Building2, 
-  Settings, 
   LogOut,
   ChevronLeft,
   Moon,
@@ -36,11 +35,11 @@ export default function Profile() {
     <MobileLayout title="حسابي">
       <div className="px-4 py-4 space-y-4">
         {/* Profile Card */}
-        <Card className="border-0 shadow-card overflow-hidden">
-          <div className="h-20 gradient-primary" />
+        <Card className="border-0 shadow-elevated overflow-hidden animate-fade-in">
+          <div className="h-20 gradient-hero" />
           <CardContent className="p-4 -mt-10">
             <div className="flex items-end gap-4 mb-4">
-              <Avatar className="h-20 w-20 ring-4 ring-background">
+              <Avatar className="h-20 w-20 ring-4 ring-background shadow-elevated">
                 <AvatarImage src={currentUser.avatar} alt={currentUser.name} />
                 <AvatarFallback className="bg-primary text-primary-foreground text-2xl">
                   {currentUser.name.charAt(0)}
@@ -54,15 +53,15 @@ export default function Profile() {
 
             <div className="space-y-3">
               <div className="flex items-center gap-3 text-sm">
-                <Mail className="h-4 w-4 text-muted-foreground" />
+                <Mail className="h-4 w-4 text-primary" />
                 <span className="text-foreground">{currentUser.email}</span>
               </div>
               <div className="flex items-center gap-3 text-sm">
-                <Phone className="h-4 w-4 text-muted-foreground" />
+                <Phone className="h-4 w-4 text-primary" />
                 <span className="text-foreground" dir="ltr">{currentUser.phone}</span>
               </div>
               <div className="flex items-center gap-3 text-sm">
-                <Award className="h-4 w-4 text-muted-foreground" />
+                <Award className="h-4 w-4 text-primary" />
                 <span className="text-foreground">رخصة رقم: {currentUser.licenseNumber}</span>
               </div>
             </div>
@@ -70,21 +69,21 @@ export default function Profile() {
         </Card>
 
         {/* Work Summary */}
-        <Card className="border-0 shadow-card">
+        <Card className="border-0 shadow-soft animate-slide-up">
           <CardContent className="p-4">
             <div className="flex items-center gap-2 mb-3">
               <Building2 className="h-5 w-5 text-primary" />
               <h3 className="font-semibold text-foreground">ملخص العمل</h3>
             </div>
             <div className="grid grid-cols-2 gap-4">
-              <div className="text-center p-3 bg-muted/50 rounded-lg">
+              <div className="text-center p-3 bg-primary/5 rounded-lg border border-primary/10">
                 <p className="text-2xl font-bold text-primary">
                   {memberships.filter(m => m.employmentType === 'employee').length}
                 </p>
                 <p className="text-xs text-muted-foreground">وظائف دائمة</p>
               </div>
-              <div className="text-center p-3 bg-muted/50 rounded-lg">
-                <p className="text-2xl font-bold text-accent">
+              <div className="text-center p-3 bg-forest/5 rounded-lg border border-forest/10">
+                <p className="text-2xl font-bold text-forest">
                   {memberships.filter(m => m.employmentType === 'freelancer').length}
                 </p>
                 <p className="text-xs text-muted-foreground">عملاء مستقلين</p>
@@ -97,13 +96,13 @@ export default function Profile() {
         </Card>
 
         {/* Settings Menu */}
-        <Card className="border-0 shadow-card">
+        <Card className="border-0 shadow-soft">
           <CardContent className="p-2">
             {menuItems.map((item, index) => (
               <div key={item.path}>
                 <button
                   onClick={() => navigate(item.path)}
-                  className="w-full flex items-center gap-3 p-3 hover:bg-muted/50 rounded-lg transition-colors"
+                  className="w-full flex items-center gap-3 p-3 hover:bg-sand/50 rounded-lg transition-colors"
                 >
                   <item.icon className="h-5 w-5 text-muted-foreground" />
                   <span className="flex-1 text-right text-foreground">{item.label}</span>
@@ -116,7 +115,7 @@ export default function Profile() {
         </Card>
 
         {/* Logout */}
-        <Card className="border-0 shadow-card">
+        <Card className="border-0 shadow-soft">
           <CardContent className="p-2">
             <button
               onClick={() => navigate('/login')}
@@ -130,7 +129,7 @@ export default function Profile() {
 
         {/* Version */}
         <p className="text-center text-xs text-muted-foreground">
-          VetConnect v1.0.0
+          StableMate Vet v1.0.0
         </p>
       </div>
     </MobileLayout>
