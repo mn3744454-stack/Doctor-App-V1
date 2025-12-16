@@ -7,48 +7,83 @@
     "profile": "حسابي"
   },
   "dashboard": {
-    "welcome": "مرحباً",
+    "welcome": "مرحباً بك",
     "linkedOrganizations": "الجهات المرتبطة",
-    "todayAppointments": "مواعيد اليوم",
+    "upcomingAppointments": "المواعيد القادمة",
     "viewAll": "عرض الكل",
-    "noAppointments": "لا توجد مواعيد اليوم",
-    "statistics": "الإحصائيات",
-    "totalHorses": "إجمالي الخيول",
-    "completedAppointments": "المواعيد المكتملة",
-    "pendingAppointments": "المواعيد المعلقة"
+    "noAppointments": "لا توجد مواعيد قادمة",
+    "stats": {
+      "organizations": "الجهات",
+      "horses": "الخيول",
+      "today": "اليوم"
+    },
+    "tomorrow": "غداً",
+    "minutes": "د"
   },
   "appointments": {
     "title": "المواعيد",
     "upcoming": "القادمة",
     "past": "السابقة",
-    "all": "الكل",
-    "noAppointments": "لا توجد مواعيد",
+    "filter": "تصفية",
+    "noUpcoming": "لا توجد مواعيد قادمة",
+    "noPast": "لا توجد مواعيد سابقة",
+    "today": "اليوم",
+    "tomorrow": "غداً",
+    "minutes": "دقيقة",
     "status": {
       "scheduled": "مجدول",
+      "in_progress": "جاري",
       "completed": "مكتمل",
       "cancelled": "ملغي"
     }
   },
   "horses": {
     "title": "الخيول",
-    "search": "بحث عن حصان...",
+    "search": "ابحث عن حصان...",
+    "all": "الكل",
     "noHorses": "لا توجد خيول",
+    "years": "سنوات",
     "accessLevel": {
-      "view": "عرض فقط",
+      "view": "مشاهدة",
       "edit": "تعديل",
-      "full": "صلاحيات كاملة"
+      "full": "كامل"
     },
     "details": {
-      "medicalRecords": "السجلات الطبية",
+      "title": "تفاصيل الحصان",
+      "notFound": "الحصان غير موجود",
+      "records": "السجلات",
       "appointments": "المواعيد",
-      "info": "المعلومات",
+      "noRecords": "لا توجد سجلات طبية",
+      "noAppointments": "لا توجد مواعيد",
+      "addRecord": "إضافة سجل طبي",
+      "chipNumber": "رقم الشريحة",
       "breed": "السلالة",
       "age": "العمر",
-      "years": "سنوات",
       "color": "اللون",
-      "weight": "الوزن",
-      "kg": "كجم",
-      "owner": "المالك"
+      "gender": "الجنس",
+      "male": "ذكر",
+      "female": "أنثى"
+    }
+  },
+  "medicalRecord": {
+    "addTitle": "إضافة سجل طبي",
+    "type": "نوع السجل",
+    "selectType": "اختر نوع السجل",
+    "date": "التاريخ",
+    "diagnosis": "التشخيص",
+    "diagnosisPlaceholder": "أدخل التشخيص...",
+    "treatment": "العلاج",
+    "treatmentPlaceholder": "أدخل خطة العلاج...",
+    "notes": "ملاحظات",
+    "notesPlaceholder": "أي ملاحظات إضافية...",
+    "save": "حفظ السجل",
+    "success": "تم حفظ السجل بنجاح",
+    "types": {
+      "checkup": "فحص",
+      "treatment": "علاج",
+      "surgery": "جراحة",
+      "vaccination": "تطعيم",
+      "diagnosis": "تشخيص"
     }
   },
   "organizations": {
@@ -56,11 +91,11 @@
     "stables": "الاسطبلات",
     "clinics": "العيادات",
     "labs": "المختبرات",
+    "horsesCount": "خيول",
     "relationship": {
       "employee": "موظف",
       "freelancer": "مستقل"
-    },
-    "horsesCount": "خيول"
+    }
   },
   "messages": {
     "title": "الرسائل",

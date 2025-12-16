@@ -18,7 +18,7 @@ export default function BottomNavigation() {
   const unreadMessages = conversations.reduce((acc, c) => acc + c.unreadCount, 0);
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-xl border-t border-border safe-area-inset-bottom">
+    <nav className="fixed bottom-0 left-0 right-0 z-50 bg-card/98 backdrop-blur-xl border-t border-border safe-area-inset-bottom shadow-soft">
       <div className="flex items-center justify-around h-20 px-2">
         {navItems.map((item) => {
           const isActive = location.pathname === item.path;
@@ -37,7 +37,7 @@ export default function BottomNavigation() {
               )}
             >
               <div className="relative">
-                <Icon className={cn('h-7 w-7 transition-transform duration-200', isActive && 'stroke-[2.5] scale-110')} />
+                <Icon className={cn('h-7 w-7 transition-transform duration-200', isActive && 'scale-110')} strokeWidth={isActive ? 2.5 : 2} />
                 {showBadge && (
                   <span className="absolute -top-1.5 -right-1.5 h-5 w-5 rounded-full bg-primary text-primary-foreground text-xs flex items-center justify-center font-bold shadow-soft">
                     {unreadMessages}
@@ -45,13 +45,13 @@ export default function BottomNavigation() {
                 )}
               </div>
               <span className={cn(
-                'text-sm font-medium transition-all duration-200',
-                isActive && 'font-bold'
+                'text-sm transition-all duration-200',
+                isActive ? 'font-bold' : 'font-semibold'
               )}>
                 {t(item.labelKey)}
               </span>
               {isActive && (
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-10 h-1 bg-primary rounded-full" />
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-12 h-1 bg-primary rounded-full" />
               )}
             </button>
           );

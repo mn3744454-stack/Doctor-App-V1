@@ -9,22 +9,30 @@
   "dashboard": {
     "welcome": "स्वागत है",
     "linkedOrganizations": "जुड़े संगठन",
-    "todayAppointments": "आज की अपॉइंटमेंट",
+    "upcomingAppointments": "आने वाली अपॉइंटमेंट",
     "viewAll": "सभी देखें",
-    "noAppointments": "आज कोई अपॉइंटमेंट नहीं",
-    "statistics": "आंकड़े",
-    "totalHorses": "कुल घोड़े",
-    "completedAppointments": "पूर्ण",
-    "pendingAppointments": "लंबित"
+    "noAppointments": "कोई आने वाली अपॉइंटमेंट नहीं",
+    "stats": {
+      "organizations": "संगठन",
+      "horses": "घोड़े",
+      "today": "आज"
+    },
+    "tomorrow": "कल",
+    "minutes": "मिनट"
   },
   "appointments": {
     "title": "अपॉइंटमेंट",
-    "upcoming": "आगामी",
+    "upcoming": "आने वाली",
     "past": "पिछली",
-    "all": "सभी",
-    "noAppointments": "कोई अपॉइंटमेंट नहीं",
+    "filter": "फ़िल्टर",
+    "noUpcoming": "कोई आने वाली अपॉइंटमेंट नहीं",
+    "noPast": "कोई पिछली अपॉइंटमेंट नहीं",
+    "today": "आज",
+    "tomorrow": "कल",
+    "minutes": "मिनट",
     "status": {
       "scheduled": "निर्धारित",
+      "in_progress": "चल रहा है",
       "completed": "पूर्ण",
       "cancelled": "रद्द"
     }
@@ -32,35 +40,62 @@
   "horses": {
     "title": "घोड़े",
     "search": "घोड़ा खोजें...",
+    "all": "सभी",
     "noHorses": "कोई घोड़ा नहीं मिला",
+    "years": "वर्ष",
     "accessLevel": {
-      "view": "केवल देखें",
-      "edit": "संपादित करें",
-      "full": "पूर्ण पहुंच"
+      "view": "देखें",
+      "edit": "संपादित",
+      "full": "पूर्ण"
     },
     "details": {
-      "medicalRecords": "चिकित्सा रिकॉर्ड",
+      "title": "घोड़े का विवरण",
+      "notFound": "घोड़ा नहीं मिला",
+      "records": "रिकॉर्ड",
       "appointments": "अपॉइंटमेंट",
-      "info": "जानकारी",
+      "noRecords": "कोई चिकित्सा रिकॉर्ड नहीं",
+      "noAppointments": "कोई अपॉइंटमेंट नहीं",
+      "addRecord": "चिकित्सा रिकॉर्ड जोड़ें",
+      "chipNumber": "चिप नंबर",
       "breed": "नस्ल",
       "age": "उम्र",
-      "years": "साल",
       "color": "रंग",
-      "weight": "वजन",
-      "kg": "किलो",
-      "owner": "मालिक"
+      "gender": "लिंग",
+      "male": "नर",
+      "female": "मादा"
+    }
+  },
+  "medicalRecord": {
+    "addTitle": "चिकित्सा रिकॉर्ड जोड़ें",
+    "type": "रिकॉर्ड प्रकार",
+    "selectType": "रिकॉर्ड प्रकार चुनें",
+    "date": "तारीख",
+    "diagnosis": "निदान",
+    "diagnosisPlaceholder": "निदान दर्ज करें...",
+    "treatment": "उपचार",
+    "treatmentPlaceholder": "उपचार योजना दर्ज करें...",
+    "notes": "नोट्स",
+    "notesPlaceholder": "कोई अतिरिक्त नोट्स...",
+    "save": "रिकॉर्ड सहेजें",
+    "success": "रिकॉर्ड सफलतापूर्वक सहेजा गया",
+    "types": {
+      "checkup": "जांच",
+      "treatment": "उपचार",
+      "surgery": "सर्जरी",
+      "vaccination": "टीकाकरण",
+      "diagnosis": "निदान"
     }
   },
   "organizations": {
     "title": "संगठन",
     "stables": "अस्तबल",
     "clinics": "क्लिनिक",
-    "labs": "लैब",
+    "labs": "प्रयोगशालाएं",
+    "horsesCount": "घोड़े",
     "relationship": {
       "employee": "कर्मचारी",
       "freelancer": "फ्रीलांसर"
-    },
-    "horsesCount": "घोड़े"
+    }
   },
   "messages": {
     "title": "संदेश",
@@ -74,14 +109,14 @@
     "markAllRead": "सभी को पढ़ा हुआ चिह्नित करें"
   },
   "profile": {
-    "title": "मेरा प्रोफ़ाइल",
+    "title": "मेरी प्रोफ़ाइल",
     "editProfile": "प्रोफ़ाइल संपादित करें",
     "settings": "सेटिंग्स",
     "language": "भाषा",
     "notifications": "सूचनाएं",
     "darkMode": "डार्क मोड",
     "logout": "लॉग आउट",
-    "about": "ऐप के बारे में"
+    "about": "के बारे में"
   },
   "common": {
     "loading": "लोड हो रहा है...",
@@ -103,6 +138,6 @@
     "submit": "लॉग इन",
     "forgotPassword": "पासवर्ड भूल गए?",
     "noAccount": "खाता नहीं है?",
-    "register": "रजिस्टर करें"
+    "register": "रजिस्टर"
   }
 }

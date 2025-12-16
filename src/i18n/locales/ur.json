@@ -1,30 +1,38 @@
 {
   "nav": {
     "home": "ہوم",
-    "appointments": "اپوائنٹمنٹس",
+    "appointments": "ملاقاتیں",
     "horses": "گھوڑے",
     "messages": "پیغامات",
     "profile": "پروفائل"
   },
   "dashboard": {
     "welcome": "خوش آمدید",
-    "linkedOrganizations": "منسلک تنظیمیں",
-    "todayAppointments": "آج کی اپوائنٹمنٹس",
+    "linkedOrganizations": "منسلک ادارے",
+    "upcomingAppointments": "آنے والی ملاقاتیں",
     "viewAll": "سب دیکھیں",
-    "noAppointments": "آج کوئی اپوائنٹمنٹ نہیں",
-    "statistics": "اعدادوشمار",
-    "totalHorses": "کل گھوڑے",
-    "completedAppointments": "مکمل",
-    "pendingAppointments": "زیر التواء"
+    "noAppointments": "کوئی آنے والی ملاقات نہیں",
+    "stats": {
+      "organizations": "ادارے",
+      "horses": "گھوڑے",
+      "today": "آج"
+    },
+    "tomorrow": "کل",
+    "minutes": "منٹ"
   },
   "appointments": {
-    "title": "اپوائنٹمنٹس",
+    "title": "ملاقاتیں",
     "upcoming": "آنے والی",
     "past": "گزشتہ",
-    "all": "سب",
-    "noAppointments": "کوئی اپوائنٹمنٹ نہیں",
+    "filter": "فلٹر",
+    "noUpcoming": "کوئی آنے والی ملاقات نہیں",
+    "noPast": "کوئی گزشتہ ملاقات نہیں",
+    "today": "آج",
+    "tomorrow": "کل",
+    "minutes": "منٹ",
     "status": {
-      "scheduled": "شیڈول",
+      "scheduled": "طے شدہ",
+      "in_progress": "جاری",
       "completed": "مکمل",
       "cancelled": "منسوخ"
     }
@@ -32,35 +40,62 @@
   "horses": {
     "title": "گھوڑے",
     "search": "گھوڑا تلاش کریں...",
+    "all": "سب",
     "noHorses": "کوئی گھوڑا نہیں ملا",
+    "years": "سال",
     "accessLevel": {
-      "view": "صرف دیکھیں",
+      "view": "دیکھیں",
       "edit": "ترمیم",
-      "full": "مکمل رسائی"
+      "full": "مکمل"
     },
     "details": {
-      "medicalRecords": "طبی ریکارڈ",
-      "appointments": "اپوائنٹمنٹس",
-      "info": "معلومات",
+      "title": "گھوڑے کی تفصیلات",
+      "notFound": "گھوڑا نہیں ملا",
+      "records": "ریکارڈز",
+      "appointments": "ملاقاتیں",
+      "noRecords": "کوئی طبی ریکارڈ نہیں",
+      "noAppointments": "کوئی ملاقات نہیں",
+      "addRecord": "طبی ریکارڈ شامل کریں",
+      "chipNumber": "چپ نمبر",
       "breed": "نسل",
       "age": "عمر",
-      "years": "سال",
       "color": "رنگ",
-      "weight": "وزن",
-      "kg": "کلوگرام",
-      "owner": "مالک"
+      "gender": "جنس",
+      "male": "نر",
+      "female": "مادہ"
+    }
+  },
+  "medicalRecord": {
+    "addTitle": "طبی ریکارڈ شامل کریں",
+    "type": "ریکارڈ کی قسم",
+    "selectType": "ریکارڈ کی قسم منتخب کریں",
+    "date": "تاریخ",
+    "diagnosis": "تشخیص",
+    "diagnosisPlaceholder": "تشخیص درج کریں...",
+    "treatment": "علاج",
+    "treatmentPlaceholder": "علاج کا منصوبہ درج کریں...",
+    "notes": "نوٹس",
+    "notesPlaceholder": "کوئی اضافی نوٹس...",
+    "save": "ریکارڈ محفوظ کریں",
+    "success": "ریکارڈ کامیابی سے محفوظ ہو گیا",
+    "types": {
+      "checkup": "معائنہ",
+      "treatment": "علاج",
+      "surgery": "سرجری",
+      "vaccination": "ٹیکہ",
+      "diagnosis": "تشخیص"
     }
   },
   "organizations": {
-    "title": "تنظیمیں",
-    "stables": "اصطبلات",
+    "title": "ادارے",
+    "stables": "اصطبل",
     "clinics": "کلینک",
-    "labs": "لیب",
+    "labs": "لیبارٹریز",
+    "horsesCount": "گھوڑے",
     "relationship": {
       "employee": "ملازم",
-      "freelancer": "فری لانسر"
-    },
-    "horsesCount": "گھوڑے"
+      "freelancer": "آزاد"
+    }
   },
   "messages": {
     "title": "پیغامات",
@@ -71,24 +106,24 @@
   "notifications": {
     "title": "اطلاعات",
     "noNotifications": "کوئی اطلاع نہیں",
-    "markAllRead": "سب پڑھا ہوا نشان زد کریں"
+    "markAllRead": "سب پڑھا ہوا نشان لگائیں"
   },
   "profile": {
-    "title": "میرا پروفائل",
+    "title": "میری پروفائل",
     "editProfile": "پروفائل میں ترمیم",
     "settings": "ترتیبات",
     "language": "زبان",
     "notifications": "اطلاعات",
     "darkMode": "ڈارک موڈ",
     "logout": "لاگ آؤٹ",
-    "about": "ایپ کے بارے میں"
+    "about": "کے بارے میں"
   },
   "common": {
     "loading": "لوڈ ہو رہا ہے...",
-    "error": "ایک خرابی ہوئی",
+    "error": "ایک خرابی پیش آئی",
     "retry": "دوبارہ کوشش کریں",
     "save": "محفوظ کریں",
-    "cancel": "منسوخ کریں",
+    "cancel": "منسوخ",
     "delete": "حذف کریں",
     "edit": "ترمیم",
     "add": "شامل کریں",
@@ -103,6 +138,6 @@
     "submit": "لاگ ان",
     "forgotPassword": "پاس ورڈ بھول گئے؟",
     "noAccount": "اکاؤنٹ نہیں ہے؟",
-    "register": "رجسٹر کریں"
+    "register": "رجسٹر"
   }
 }

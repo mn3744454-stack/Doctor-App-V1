@@ -8,6 +8,7 @@ import Dashboard from "./pages/Dashboard";
 import Appointments from "./pages/Appointments";
 import Horses from "./pages/Horses";
 import HorseDetails from "./pages/HorseDetails";
+import AddMedicalRecord from "./pages/AddMedicalRecord";
 import Organizations from "./pages/Organizations";
 import Messages from "./pages/Messages";
 import Notifications from "./pages/Notifications";
@@ -29,6 +30,7 @@ const App = () => (
           <Route path="/appointments" element={<Appointments />} />
           <Route path="/horses" element={<Horses />} />
           <Route path="/horses/:id" element={<HorseDetails />} />
+          <Route path="/horses/:id/add-record" element={<AddMedicalRecord />} />
           <Route path="/organizations" element={<Organizations />} />
           <Route path="/messages" element={<Messages />} />
           <Route path="/notifications" element={<Notifications />} />

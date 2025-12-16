@@ -1,5 +1,6 @@
 import { Calendar, Building2, Stethoscope, Clock } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import MobileLayout from '@/components/layout/MobileLayout';
 import { Card, CardContent } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -11,10 +12,14 @@ import {
   horseAccess 
 } from '@/data/mockData';
 import { format, isToday, isTomorrow, formatDistanceToNow } from 'date-fns';
-import { ar } from 'date-fns/locale';
+import { ar, enUS } from 'date-fns/locale';
+import i18n from '@/i18n';
 
 export default function Dashboard() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
+  
+  const dateLocale = i18n.language === 'ar' || i18n.language === 'ur' ? ar : enUS;
   
   const todayAppointments = appointments.filter(
     a => a.status === 'scheduled' && isToday(new Date(a.scheduledAt))
@@ -28,35 +33,35 @@ export default function Dashboard() {
   const stats = [
     { 
       icon: Building2, 
-      label: 'الجهات', 
+      labelKey: 'dashboard.stats.organizations', 
       value: memberships.length,
-      color: 'text-primary bg-primary/10',
+      color: 'text-primary bg-primary/15',
       onClick: () => navigate('/organizations')
     },
     { 
       icon: Stethoscope, 
-      label: 'الخيول', 
+      labelKey: 'dashboard.stats.horses', 
       value: horseAccess.length,
-      color: 'text-forest bg-forest/10',
+      color: 'text-forest bg-forest/15',
       onClick: () => navigate('/horses')
     },
     { 
       icon: Calendar, 
-      label: 'اليوم', 
+      labelKey: 'dashboard.stats.today', 
       value: todayAppointments.length,
-      color: 'text-amber bg-amber/10',
+      color: 'text-amber bg-amber/15',
       onClick: () => navigate('/appointments')
     },
   ];
 
   const getTimeLabel = (date: Date) => {
     if (isToday(date)) {
-      return formatDistanceToNow(date, { locale: ar, addSuffix: true });
+      return formatDistanceToNow(date, { locale: dateLocale, addSuffix: true });
     }
     if (isTomorrow(date)) {
-      return `غداً ${format(date, 'HH:mm', { locale: ar })}`;
+      return `${t('dashboard.tomorrow')} ${format(date, 'HH:mm', { locale: dateLocale })}`;
     }
-    return format(date, 'EEEE HH:mm', { locale: ar });
+    return format(date, 'EEEE HH:mm', { locale: dateLocale });
   };
 
   return (
@@ -64,16 +69,16 @@ export default function Dashboard() {
       <div className="px-4 py-4 space-y-6">
         {/* Welcome Section */}
         <div className="flex items-center gap-4 animate-fade-in">
-          <Avatar className="h-14 w-14 ring-2 ring-primary/20 shadow-soft">
+          <Avatar className="h-16 w-16 ring-2 ring-primary/30 shadow-soft">
             <AvatarImage src={currentUser.avatar} alt={currentUser.name} />
-            <AvatarFallback className="bg-primary text-primary-foreground text-lg">
+            <AvatarFallback className="bg-primary text-primary-foreground text-xl font-bold">
               {currentUser.name.charAt(0)}
             </AvatarFallback>
           </Avatar>
           <div className="flex-1">
-            <p className="text-muted-foreground text-sm">مرحباً بك</p>
-            <h2 className="text-xl font-bold text-foreground">{currentUser.name}</h2>
-            <p className="text-xs text-muted-foreground">{currentUser.specialization}</p>
+            <p className="text-muted-foreground text-base">{t('dashboard.welcome')}</p>
+            <h2 className="text-2xl font-bold text-foreground">{currentUser.name}</h2>
+            <p className="text-sm text-muted-foreground font-medium">{currentUser.specialization}</p>
           </div>
         </div>
 
@@ -86,11 +91,11 @@ export default function Dashboard() {
               onClick={stat.onClick}
             >
               <CardContent className="p-4 flex flex-col items-center gap-2">
-                <div className={`p-2 rounded-full ${stat.color}`}>
-                  <stat.icon className="h-5 w-5" />
+                <div className={`p-3 rounded-full ${stat.color}`}>
+                  <stat.icon className="h-6 w-6" strokeWidth={2.5} />
                 </div>
-                <span className="text-2xl font-bold text-foreground">{stat.value}</span>
-                <span className="text-xs text-muted-foreground">{stat.label}</span>
+                <span className="text-3xl font-bold text-foreground">{stat.value}</span>
+                <span className="text-sm font-medium text-muted-foreground">{t(stat.labelKey)}</span>
               </CardContent>
             </Card>
           ))}
@@ -99,20 +104,20 @@ export default function Dashboard() {
         {/* Upcoming Appointments */}
         <div className="space-y-3">
           <div className="flex items-center justify-between">
-            <h3 className="text-base font-semibold text-foreground">المواعيد القادمة</h3>
+            <h3 className="text-lg font-bold text-foreground">{t('dashboard.upcomingAppointments')}</h3>
             <button 
               onClick={() => navigate('/appointments')}
-              className="text-sm text-primary font-medium hover:text-primary/80 transition-colors"
+              className="text-base text-primary font-semibold hover:text-primary/80 transition-colors"
             >
-              عرض الكل
+              {t('dashboard.viewAll')}
             </button>
           </div>
 
           {upcomingAppointments.length === 0 ? (
             <Card className="border-0 shadow-soft">
               <CardContent className="p-6 text-center">
-                <Calendar className="h-10 w-10 mx-auto text-muted-foreground/50 mb-2" />
-                <p className="text-muted-foreground text-sm">لا توجد مواعيد قادمة</p>
+                <Calendar className="h-12 w-12 mx-auto text-muted-foreground/50 mb-2" />
+                <p className="text-muted-foreground text-base">{t('dashboard.noAppointments')}</p>
               </CardContent>
             </Card>
           ) : (
@@ -126,7 +131,7 @@ export default function Dashboard() {
                 >
                   <CardContent className="p-4">
                     <div className="flex items-start gap-3">
-                      <div className="h-12 w-12 rounded-lg overflow-hidden bg-sand flex-shrink-0">
+                      <div className="h-14 w-14 rounded-xl overflow-hidden bg-sand flex-shrink-0 shadow-soft">
                         <img 
                           src={appointment.horse?.image} 
                           alt={appointment.horse?.name}
@@ -136,22 +141,22 @@ export default function Dashboard() {
                       <div className="flex-1 min-w-0">
                         <div className="flex items-start justify-between gap-2">
                           <div>
-                            <h4 className="font-semibold text-foreground truncate">
+                            <h4 className="font-bold text-foreground text-base truncate">
                               {appointment.title}
                             </h4>
-                            <p className="text-sm text-muted-foreground truncate">
+                            <p className="text-sm text-muted-foreground font-medium truncate">
                               {appointment.horse?.name} • {appointment.organization?.name}
                             </p>
                           </div>
                           <Badge 
                             variant="secondary" 
-                            className="text-xs flex-shrink-0 bg-amber/10 text-amber-foreground border-amber/20"
+                            className="text-sm flex-shrink-0 bg-amber/15 text-stable-brown border-amber/30 font-semibold"
                           >
-                            {appointment.duration} د
+                            {appointment.duration} {t('dashboard.minutes')}
                           </Badge>
                         </div>
-                        <div className="flex items-center gap-1 mt-2 text-xs text-muted-foreground">
-                          <Clock className="h-3.5 w-3.5" />
+                        <div className="flex items-center gap-1.5 mt-2 text-sm text-muted-foreground font-medium">
+                          <Clock className="h-4 w-4 text-primary" strokeWidth={2.5} />
                           <span>{getTimeLabel(new Date(appointment.scheduledAt))}</span>
                         </div>
                       </div>
@@ -166,12 +171,12 @@ export default function Dashboard() {
         {/* Organizations Quick Access */}
         <div className="space-y-3">
           <div className="flex items-center justify-between">
-            <h3 className="text-base font-semibold text-foreground">الجهات المرتبطة</h3>
+            <h3 className="text-lg font-bold text-foreground">{t('dashboard.linkedOrganizations')}</h3>
             <button 
               onClick={() => navigate('/organizations')}
-              className="text-sm text-primary font-medium hover:text-primary/80 transition-colors"
+              className="text-base text-primary font-semibold hover:text-primary/80 transition-colors"
             >
-              عرض الكل
+              {t('dashboard.viewAll')}
             </button>
           </div>
 
@@ -179,29 +184,29 @@ export default function Dashboard() {
             {memberships.map((membership) => (
               <Card 
                 key={membership.id}
-                className="flex-shrink-0 w-32 border-0 shadow-soft cursor-pointer hover:shadow-elevated transition-all duration-300"
+                className="flex-shrink-0 w-36 border-0 shadow-soft cursor-pointer hover:shadow-elevated transition-all duration-300"
                 onClick={() => navigate(`/organizations/${membership.organizationId}`)}
               >
-                <CardContent className="p-3 flex flex-col items-center gap-2">
-                  <div className="h-12 w-12 rounded-full overflow-hidden bg-sand shadow-soft">
+                <CardContent className="p-4 flex flex-col items-center gap-2">
+                  <div className="h-14 w-14 rounded-full overflow-hidden bg-sand shadow-soft">
                     <img 
                       src={membership.organization?.logo}
                       alt={membership.organization?.name}
                       className="h-full w-full object-cover"
                     />
                   </div>
-                  <p className="text-xs font-medium text-foreground text-center truncate w-full">
+                  <p className="text-sm font-semibold text-foreground text-center truncate w-full">
                     {membership.organization?.name}
                   </p>
                   <Badge 
                     variant="outline" 
-                    className={`text-[10px] ${
+                    className={`text-xs font-semibold ${
                       membership.employmentType === 'employee' 
-                        ? 'border-primary/30 text-primary bg-primary/5' 
-                        : 'border-forest/30 text-forest bg-forest/5'
+                        ? 'border-primary/40 text-primary bg-primary/10' 
+                        : 'border-forest/40 text-forest bg-forest/10'
                     }`}
                   >
-                    {membership.employmentType === 'employee' ? 'موظف' : 'مستقل'}
+                    {t(`organizations.relationship.${membership.employmentType}`)}
                   </Badge>
                 </CardContent>
               </Card>

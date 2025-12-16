@@ -9,22 +9,30 @@
   "dashboard": {
     "welcome": "Welcome",
     "linkedOrganizations": "Linked Organizations",
-    "todayAppointments": "Today's Appointments",
+    "upcomingAppointments": "Upcoming Appointments",
     "viewAll": "View All",
-    "noAppointments": "No appointments today",
-    "statistics": "Statistics",
-    "totalHorses": "Total Horses",
-    "completedAppointments": "Completed",
-    "pendingAppointments": "Pending"
+    "noAppointments": "No upcoming appointments",
+    "stats": {
+      "organizations": "Organizations",
+      "horses": "Horses",
+      "today": "Today"
+    },
+    "tomorrow": "Tomorrow",
+    "minutes": "min"
   },
   "appointments": {
     "title": "Appointments",
     "upcoming": "Upcoming",
     "past": "Past",
-    "all": "All",
-    "noAppointments": "No appointments",
+    "filter": "Filter",
+    "noUpcoming": "No upcoming appointments",
+    "noPast": "No past appointments",
+    "today": "Today",
+    "tomorrow": "Tomorrow",
+    "minutes": "minutes",
     "status": {
       "scheduled": "Scheduled",
+      "in_progress": "In Progress",
       "completed": "Completed",
       "cancelled": "Cancelled"
     }
@@ -32,23 +40,50 @@
   "horses": {
     "title": "Horses",
     "search": "Search for a horse...",
+    "all": "All",
     "noHorses": "No horses found",
+    "years": "years",
     "accessLevel": {
-      "view": "View Only",
+      "view": "View",
       "edit": "Edit",
-      "full": "Full Access"
+      "full": "Full"
     },
     "details": {
-      "medicalRecords": "Medical Records",
+      "title": "Horse Details",
+      "notFound": "Horse not found",
+      "records": "Records",
       "appointments": "Appointments",
-      "info": "Information",
+      "noRecords": "No medical records",
+      "noAppointments": "No appointments",
+      "addRecord": "Add Medical Record",
+      "chipNumber": "Chip Number",
       "breed": "Breed",
       "age": "Age",
-      "years": "years",
       "color": "Color",
-      "weight": "Weight",
-      "kg": "kg",
-      "owner": "Owner"
+      "gender": "Gender",
+      "male": "Male",
+      "female": "Female"
+    }
+  },
+  "medicalRecord": {
+    "addTitle": "Add Medical Record",
+    "type": "Record Type",
+    "selectType": "Select record type",
+    "date": "Date",
+    "diagnosis": "Diagnosis",
+    "diagnosisPlaceholder": "Enter diagnosis...",
+    "treatment": "Treatment",
+    "treatmentPlaceholder": "Enter treatment plan...",
+    "notes": "Notes",
+    "notesPlaceholder": "Any additional notes...",
+    "save": "Save Record",
+    "success": "Record saved successfully",
+    "types": {
+      "checkup": "Checkup",
+      "treatment": "Treatment",
+      "surgery": "Surgery",
+      "vaccination": "Vaccination",
+      "diagnosis": "Diagnosis"
     }
   },
   "organizations": {
@@ -56,11 +91,11 @@
     "stables": "Stables",
     "clinics": "Clinics",
     "labs": "Labs",
+    "horsesCount": "horses",
     "relationship": {
       "employee": "Employee",
       "freelancer": "Freelancer"
-    },
-    "horsesCount": "horses"
+    }
   },
   "messages": {
     "title": "Messages",
